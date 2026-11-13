@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <title>ប្រព័ន្ធតេស្តគណិតវិទ្យាថ្នាក់ទី៨ - មេរៀនទី៣ (២.៥)៖ ការប្រាក់សាមញ្ញ</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Kantumruy Pro, Moul, & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Moul&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2canvas for Certificate Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- Firebase SDKs for Auto Sync to Central Collector App -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Kantumruy Pro"', '"Plus Jakarta Sans"', 'sans-serif'],
+                        moul: ['"Moul"', 'serif'],
+                    },
+                    colors: {
+                        gold: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                            950: '#451a03',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Anti-Cheat & Security Locks: No Copy, No Select, No Callout */
+        * {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
+        }
+        input, select {
+            -webkit-user-select: auto !important;
+            user-select: auto !important;
+        }
+
+        /* Pure HTML Mathematical Fraction Styling */
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            text-align: center;
+            padding: 0 5px;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+        .fraction .num {
+            border-bottom: 2px solid currentColor;
+            padding-bottom: 2px;
+            display: block;
+        }
+        .fraction .den {
+            padding-top: 2px;
+            display: block;
+        }
+
+        /* Luxury Gold Theme */
+        .bg-luxury-dark {
+            background: radial-gradient(circle at 50% 20%, #1c1408 0%, #0c0a06 60%, #050402 100%);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fef08a 0%, #facc15 30%, #eab308 50%, #ca8a04 80%, #a16207 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-border-glow {
+            border: 2px solid rgba(234, 179, 8, 0.6);
+            box-shadow: 0 0 35px rgba(234, 179, 8, 0.25), inset 0 0 20px rgba(234, 179, 8, 0.1);
+        }
+        .gold-card {
+            background: linear-gradient(145deg, rgba(30, 24, 15, 0.95) 0%, rgba(18, 14, 8, 0.95) 100%);
+            border: 1px solid rgba(234, 179, 8, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(254, 240, 138, 0.2);
+        }
+        .gold-button {
+            background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #b45309 100%);
+            color: #1c1408;
+            box-shadow: 0 6px 20px rgba(202, 138, 4, 0.4);
+            transition: all 0.3s ease;
+        }
+        .gold-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(202, 138, 4, 0.6);
+            filter: brightness(1.08);
+        }
+        .cert-bg {
+            background: #ffffff;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(254, 243, 199, 0.4) 0%, rgba(255, 255, 255, 1) 85%),
+                linear-gradient(45deg, rgba(217, 119, 6, 0.03) 25%, transparent 25%), 
+                linear-gradient(-45deg, rgba(217, 119, 6, 0.03) 25%, transparent 25%);
+        }
+    </style>
+</head>
+<body class="bg-luxury-dark text-slate-100 min-h-screen font-sans flex flex-col justify-between selection:bg-transparent selection:text-transparent">
+
+    <!-- Anti-Cheat Security Violation Overlay -->
+    <div id="securityViolationModal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-2xl hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border-2 border-rose-500 p-8 rounded-3xl max-w-md w-full text-center space-y-5 shadow-2xl">
+            <div class="w-16 h-16 rounded-full bg-rose-500/20 text-rose-500 border border-rose-500/40 flex items-center justify-center mx-auto text-3xl animate-bounce">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-lg font-bold text-rose-400">ការព្រមានសុវត្ថិភាពប្រឡង!</h3>
+                <p id="securityViolationReason" class="text-xs text-slate-300 leading-relaxed">
+                    ប្រព័ន្ធបានចាប់សញ្ញាថាអ្នកបានចាកចេញពីផ្ទាំងតេស្ត ឬព្យាយាមបំបែកអេក្រង់!
+                </p>
+            </div>
+            <div class="p-3 rounded-2xl bg-rose-950/40 border border-rose-900/60 text-[11px] text-rose-300">
+                ចំនួនដងល្មើសបម្រាម៖ <strong id="violationCountBadge" class="text-rose-400 text-sm font-mono">1 / 3</strong> (បើសិនលើស ៣ ដង លទ្ធផលតេស្តនឹងត្រូវចាត់ទុកជាមោឃៈ!)
+            </div>
+            <button onclick="resumeQuizAfterViolation()" class="w-full py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-lg shadow-rose-600/30 transition">
+                ខ្ញុំយល់ព្រម និងបន្តការធ្វើតេស្តវិញ
+            </button>
+        </div>
+    </div>
+
+    <!-- Hint Modal Box -->
+    <div id="hintModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md hidden items-center justify-center p-4">
+        <div class="gold-card border border-amber-400/50 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl text-center">
+            <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-400/30 flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <div class="space-y-1">
+                <h3 class="text-base font-bold text-amber-300">ជំនួយគន្លឹះដោះស្រាយ (Hint)</h3>
+                <p id="hintText" class="text-xs text-amber-100/90 leading-relaxed p-3 bg-amber-950/40 rounded-xl border border-amber-500/30 text-left">
+                    -
+                </p>
+            </div>
+            <div class="flex justify-between items-center text-[11px] text-slate-400 border-t border-amber-500/20 pt-3">
+                <span>ជំនួយនៅសល់៖ <strong id="hintRemainingBadge" class="text-amber-400 font-bold">2/3</strong></span>
+                <button onclick="closeHintModal()" class="px-4 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 font-semibold transition">
+                    បិទ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Brand Header -->
+    <header class="w-full border-b border-amber-500/20 bg-black/40 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-700 p-0.5 shadow-lg shadow-amber-500/20 shrink-0">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-amber-400 text-lg font-bold">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm sm:text-base leading-tight text-white flex items-center gap-2">
+                        <span>វិទ្យាល័យ ជា ស៊ីម ឈូកវ៉ា</span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-semibold">ថ្នាក់ទី ៨</span>
+                    </h1>
+                    <p class="text-[11px] text-amber-200/70 font-medium">
+                        មេរៀនទី៣ (២.៥)៖ ការប្រាក់សាមញ្ញ • គ្រូបង្រៀន៖ <strong class="text-amber-400 font-bold">លោកគ្រូ ចាន់ សុខហេង</strong>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Security Badge -->
+            <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-950/60 border border-amber-500/30 text-[11px] text-amber-300">
+                    <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+                    <span>Secure Exam Lock</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-3xl w-full mx-auto p-4 sm:p-6 flex items-center justify-center">
+
+        <!-- ================= ផ្ទាំងទី ១: ផ្ទាំងស្វាគមន៍មាសប្រណិត ================= -->
+        <div id="screen1_welcome" class="w-full gold-card gold-border-glow rounded-[2.5rem] p-6 sm:p-12 text-center space-y-8 relative overflow-hidden">
+            <div class="space-y-4 relative z-10">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-300 text-xs font-bold tracking-wider uppercase">
+                    <i class="fa-solid fa-sparkles text-amber-300"></i>
+                    <span>Math Assessment Challenge • មេរៀនទី៣៖ ទំហំសមាមាត្រ និងភាគរយ</span>
+                </div>
+
+                <h1 class="font-moul text-xl sm:text-3xl leading-relaxed sm:leading-loose gold-gradient-text tracking-wide pt-2">
+                    តេស្តសមត្ថភាពគណិតវិទ្យា
+                </h1>
+                <p class="text-base sm:text-lg font-bold text-amber-100/90 tracking-wide">
+                    ចំណុចទី ២.៥៖ ការប្រាក់សាមញ្ញ (Simple Interest)
+                </p>
+                <div class="w-28 h-0.5 mx-auto bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left relative z-10 text-xs">
+                <div class="p-4 rounded-2xl bg-amber-950/40 border border-amber-500/30 space-y-1">
+                    <div class="text-amber-400 font-extrabold text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-forward-step"></i> លំហាត់លោតបន្តបន្ទាប់
+                    </div>
+                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                        ធ្វើលំហាត់មួយចប់ នឹងលោតទៅលំហាត់បន្ទាប់ភ្លាមៗរហូតដល់ចប់ទាំង ១៥ លំហាត់។
+                    </p>
+                </div>
+                <div class="p-4 rounded-2xl bg-amber-950/40 border border-amber-500/30 space-y-1">
+                    <div class="text-amber-400 font-extrabold text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-lightbulb text-yellow-300"></i> មាន Hint ៣ ដង
+                    </div>
+                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                        មានជំនួយគន្លឹះដោះស្រាយ ៣ ដងគត់សម្រាប់ប្រើប្រាស់ពេលជួបលំហាត់ពិបាក។
+                    </p>
+                </div>
+                <div class="p-4 rounded-2xl bg-amber-950/40 border border-amber-500/30 space-y-1">
+                    <div class="text-amber-400 font-extrabold text-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-lock text-rose-400"></i> ប្រព័ន្ធសុវត្ថិភាពខ្ពស់
+                    </div>
+                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                        ហាម Screenshot, ហាមបំបែកអេក្រង់, ហាមឆ្លាស់កម្មវិធី និងហាម Copy លំហាត់។
+                    </p>
+                </div>
+            </div>
+
+            <div class="pt-4 relative z-10">
+                <button onclick="goToScreen(2)" class="gold-button px-10 py-4 rounded-2xl font-bold text-base uppercase tracking-wider inline-flex items-center gap-3">
+                    <span>ចូលរួមធ្វើតេស្តឥឡូវនេះ</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= ផ្ទាំងទី ២: ផ្ទាំងសិស្សបំពេញព័ត៌មាន (ថ្នាក់ទី A1 ដល់ F2) ================= -->
+        <div id="screen2_registration" class="w-full gold-card gold-border-glow rounded-[2.5rem] p-6 sm:p-10 space-y-6 hidden relative overflow-hidden">
+            <div class="text-center space-y-2 border-b border-amber-500/20 pb-4">
+                <span class="px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                    ជំហានទី ១ • បញ្ចូលព័ត៌មានបេក្ខជន
+                </span>
+                <h2 class="font-moul text-lg sm:text-2xl text-amber-300 pt-1">
+                    ព័ត៌មានសិស្សានុសិស្ស
+                </h2>
+                <p class="text-xs text-slate-400">
+                    សូមបំពេញព័ត៌មានឱ្យបានត្រឹមត្រូវ ដើម្បីបង្ហាញលើបណ្ណសរសើរផ្លូវការ
+                </p>
+            </div>
+
+            <form id="studentRegistrationForm" onsubmit="handleRegistrationSubmit(event)" class="space-y-4 max-w-lg mx-auto text-xs">
+                <div>
+                    <label class="block font-semibold text-amber-200 mb-1.5">គោត្តនាម និងនាមសិស្ស (ឈ្មោះពេញ) <span class="text-rose-400">*</span></label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-3.5 top-3.5 text-amber-400 text-sm"></i>
+                        <input type="text" id="stuName" required placeholder="ឧ. ការែន សុផាន់ណា" class="w-full pl-10 pr-4 py-3 rounded-xl border border-amber-500/40 bg-black/50 text-white font-medium text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label class="block font-semibold text-amber-200 mb-1.5">ភេទ <span class="text-rose-400">*</span></label>
+                        <select id="stuGender" required class="w-full px-3.5 py-3 rounded-xl border border-amber-500/40 bg-black/50 text-white font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="ប្រុស">ប្រុស (Male)</option>
+                            <option value="ស្រី">ស្រី (Female)</option>
+                        </select>
+                    </div>
+
+                    <!-- ថ្នាក់ទី A1, A2, B1, B2, C1, C2, D1, D2, E1, E2, F1, F2 -->
+                    <div>
+                        <label class="block font-semibold text-amber-200 mb-1.5">ថ្នាក់ទី (Grade Room) <span class="text-rose-400">*</span></label>
+                        <select id="stuGrade" required class="w-full px-3.5 py-3 rounded-xl border border-amber-500/40 bg-black/50 text-amber-300 font-bold text-sm focus:outline-none focus:ring-2 focus:ring-amber-400">
+                            <option value="A1">ថ្នាក់ទី 8A1</option>
+                            <option value="A2">ថ្នាក់ទី 8A2</option>
+                            <option value="B1">ថ្នាក់ទី 8B1</option>
+                            <option value="B2">ថ្នាក់ទី 8B2</option>
+                            <option value="C1">ថ្នាក់ទី 8C1</option>
+                            <option value="C2" selected>ថ្នាក់ទី 8C2</option>
+                            <option value="D1">ថ្នាក់ទី 8D1</option>
+                            <option value="D2">ថ្នាក់ទី 8D2</option>
+                            <option value="E1">ថ្នាក់ទី 8E1</option>
+                            <option value="E2">ថ្នាក់ទី 8E2</option>
+                            <option value="F1">ថ្នាក់ទី 8F1</option>
+                            <option value="F2">ថ្នាក់ទី 8F2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-amber-200 mb-1.5">គ្រឹះស្ថានសិក្សា</label>
+                    <input type="text" id="stuSchool" readonly value="វិទ្យាល័យ ជា ស៊ីម ឈូកវ៉ា" class="w-full px-3.5 py-3 rounded-xl border border-amber-500/30 bg-black/30 text-amber-100 font-medium text-sm focus:outline-none cursor-not-allowed">
+                </div>
+
+                <div class="pt-4 flex gap-3">
+                    <button type="button" onclick="goToScreen(1)" class="px-5 py-3 rounded-xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-slate-300 font-bold transition">
+                        ត្រឡប់ក្រោយ
+                    </button>
+                    <button type="submit" class="flex-1 gold-button py-3 rounded-xl font-bold text-sm shadow-md flex items-center justify-center gap-2">
+                        <span>ចូលធ្វើតេស្ត & ចាក់សោសុវត្ថិភាព</span>
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ================= ផ្ទាំងធ្វើតេស្ត៖ ធ្វើលំហាត់មួយចប់ លោតមួយទៀតបន្តបន្ទាប់ + HINT ៣ ដង ================= -->
+        <div id="screen_quiz_workspace" class="w-full gold-card gold-border-glow rounded-[2.5rem] p-5 sm:p-8 space-y-6 hidden">
+            
+            <!-- Top Status & Hint Controller Bar -->
+            <div class="flex items-center justify-between gap-3 border-b border-amber-500/20 pb-4">
+                <div class="space-y-1">
+                    <span id="quizBadgeLevel" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        កម្រិតទី ១ (ស្រាល)
+                    </span>
+                    <h3 id="quizProgressText" class="text-sm font-bold text-white">
+                        សំណួរទី ១ នៃ ១៥
+                    </h3>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <!-- Hint Button (Max 3 uses) -->
+                    <button onclick="useHint()" id="btnHint" class="px-3.5 py-2 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 text-xs font-bold flex items-center gap-1.5 transition active:scale-95 shadow-sm">
+                        <i class="fa-solid fa-lightbulb text-yellow-300"></i>
+                        <span>Hint ជំនួយ</span>
+                        <span id="hintBadgeCount" class="w-5 h-5 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center text-[10px] font-extrabold ml-0.5">3</span>
+                    </button>
+
+                    <div class="text-right">
+                        <span id="quizStudentTag" class="text-xs font-bold text-amber-300 block">-</span>
+                        <span class="text-[10px] text-slate-400">ពិន្ទុអតិបរមា៖ ១៥</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-slate-700">
+                <div id="quizProgressBar" class="bg-gradient-to-r from-amber-400 to-yellow-500 h-full w-[6.6%] transition-all duration-300"></div>
+            </div>
+
+            <!-- Question & Choices Card -->
+            <div class="space-y-5 py-2">
+                <div class="space-y-1.5">
+                    <span id="qLevelCategoryLabel" class="text-[11px] font-semibold text-amber-400/90 tracking-wide"></span>
+                    <h2 id="qTitleHtml" class="text-base sm:text-lg font-bold text-slate-100 leading-relaxed">
+                        សំណួរ...
+                    </h2>
+                </div>
+
+                <!-- Dynamic Multiple Choice List -->
+                <div id="qChoicesList" class="space-y-3"></div>
+            </div>
+
+            <!-- Bottom Action -->
+            <div class="flex items-center justify-between pt-4 border-t border-amber-500/20">
+                <span id="quizSelectionWarning" class="text-rose-400 text-xs hidden">
+                    <i class="fa-solid fa-triangle-exclamation mr-1"></i>សូមជ្រើសរើសចម្លើយមួយសិន!
+                </span>
+                <button onclick="handleQuestionSubmitAndNext()" id="btnSubmitNext" class="ml-auto gold-button px-8 py-3 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center gap-2">
+                    <span>ឆ្លើយ & លោតសំណួរបន្ទាប់</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- ================= ផ្ទាំងចុងក្រោយ: ផ្ទាំងបណ្ណសរសើរមាសប្រណិត ================= -->
+        <div id="screen6_certificate" class="w-full space-y-6 hidden">
+            
+            <div class="p-3.5 rounded-2xl bg-emerald-950/70 border border-emerald-500/50 flex items-center justify-between text-xs text-emerald-200">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+                    <span>លទ្ធផលត្រូវបានបញ្ជូនដោយស្វ័យប្រវត្តិចូលទៅកាន់ <strong>ExamHub Collector (គ្រូ)</strong> រួចរាល់!</span>
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full bg-emerald-900 border border-emerald-700 text-[10px] font-bold">Cloud Synced</span>
+            </div>
+
+            <!-- Certificate Area for html2canvas -->
+            <div id="certificateCaptureContainer" class="cert-bg p-6 sm:p-12 rounded-[2.5rem] border-4 border-amber-600 shadow-2xl relative text-slate-900 overflow-hidden text-center space-y-6">
+                
+                <div class="absolute top-3 left-3 text-amber-600/40 text-lg">❖</div>
+                <div class="absolute top-3 right-3 text-amber-600/40 text-lg">❖</div>
+                <div class="absolute bottom-3 left-3 text-amber-600/40 text-lg">❖</div>
+                <div class="absolute bottom-3 right-3 text-amber-600/40 text-lg">❖</div>
+                <div class="absolute inset-2 border border-amber-400/50 rounded-[2rem] pointer-events-none"></div>
+
+                <div class="flex items-start justify-between border-b-2 border-amber-600/30 pb-4">
+                    <div class="text-left space-y-1">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-800 block">
+                            ព្រះរាជាណាចក្រកម្ពុជា • ជាតិ សាសនា ព្រះមហាក្សត្រ
+                        </span>
+                        <h4 class="font-bold text-xs text-indigo-950">
+                            ក្រសួងអប់រំ យុវជន និងកីឡា • វិទ្យាល័យ ជា ស៊ីម ឈូកវ៉ា
+                        </h4>
+                    </div>
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-600 via-amber-500 to-yellow-400 flex items-center justify-center text-white text-2xl shadow-md border-2 border-amber-300">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                </div>
+
+                <div class="space-y-1 pt-2">
+                    <h2 class="font-moul text-xl sm:text-3xl text-amber-800 tracking-wider">
+                        បណ្ណសរសើរ
+                    </h2>
+                    <p class="text-xs uppercase tracking-widest text-slate-500 font-bold">
+                        Certificate of Academic Excellence in Mathematics
+                    </p>
+                </div>
+
+                <div class="space-y-2 py-1">
+                    <p class="text-xs text-slate-600 italic">បណ្ណសរសើរនេះត្រូវបានប្រគល់ជូនដោយកិត្តិយសចំពោះសិស្សឈ្មោះ៖</p>
+                    <h3 id="certStudentFullName" class="font-moul text-2xl sm:text-3xl text-indigo-950 gold-gradient-text tracking-wide py-1">
+                        -
+                    </h3>
+                    <div class="flex items-center justify-center gap-3 text-xs font-semibold text-slate-700">
+                        <span>ភេទ៖ <strong id="certStudentGender" class="text-slate-900">-</strong></span>
+                        <span>•</span>
+                        <span>ថ្នាក់ទី៖ <strong id="certStudentGrade" class="text-indigo-800 font-bold">-</strong></span>
+                        <span>•</span>
+                        <span>សាលារៀន៖ <strong class="text-slate-900">វិទ្យាល័យ ជា ស៊ីម ឈូកវ៉ា</strong></span>
+                    </div>
+                    <p class="text-xs text-slate-600 max-w-lg mx-auto leading-relaxed pt-2">
+                        ដែលបានខិតខំប្រឹងប្រែង និងឆ្លងកាត់ការធ្វើតេស្តសមត្ថភាពគណិតវិទ្យា <strong>«មេរៀនទី៣ (២.៥)៖ ការប្រាក់សាមញ្ញ»</strong> ទាំង ១៥ លំហាត់ (ស្រាល មធ្យម និងធ្ងន់) ក្រោមប្រព័ន្ធសុវត្ថិភាពតឹងរ៉ឹង ដោយទទួលបានលទ្ធផលគំរូ។
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 max-w-md mx-auto py-2">
+                    <div class="bg-amber-50/80 p-3 rounded-2xl border border-amber-300/80 shadow-xs">
+                        <span class="text-[10px] text-amber-800 font-medium block">ពិន្ទុទទួលបាន</span>
+                        <span id="certFinalScore" class="font-extrabold text-xl text-indigo-950 font-mono">15/15</span>
+                    </div>
+                    <div class="bg-emerald-50/80 p-3 rounded-2xl border border-emerald-300/80 shadow-xs">
+                        <span class="text-[10px] text-emerald-800 font-medium block">ភាគរយជោគជ័យ</span>
+                        <span id="certPercentage" class="font-extrabold text-xl text-emerald-700 font-mono">100%</span>
+                    </div>
+                    <div class="bg-purple-50/80 p-3 rounded-2xl border border-purple-300/80 shadow-xs">
+                        <span class="text-[10px] text-purple-800 font-medium block">និទ្ទេសវាយតម្លៃ</span>
+                        <span id="certEvaluation" class="font-extrabold text-lg text-purple-700">ល្អប្រសើរ (A)</span>
+                    </div>
+                </div>
+
+                <div class="flex items-end justify-between pt-6 border-t-2 border-amber-600/30 text-xs">
+                    <div class="text-left text-[11px] text-slate-500 space-y-0.5">
+                        <p id="certIssuedDate">កាលបរិច្ឆេទ៖ ថ្ងៃទី... ខែ... ឆ្នាំ...</p>
+                        <p class="font-mono text-[10px] text-slate-400">លេខកូដបណ្ណ៖ <span id="certUniqueCode">MC8-L325-2026</span></p>
+                    </div>
+
+                    <div class="text-center space-y-1">
+                        <p class="text-[11px] font-semibold text-slate-600">គ្រូបង្រៀនឯកទេសគណិតវិទ្យា</p>
+                        <div class="h-9 flex items-center justify-center font-bold text-indigo-900 text-sm tracking-wider italic">
+                            ចាន់ សុខហេង
+                        </div>
+                        <p class="font-bold text-xs text-slate-900">លោកគ្រូ ចាន់ សុខហេង</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Download Button -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <button onclick="downloadCertificateImage()" id="btnDownloadCert" class="flex-1 gold-button py-3.5 px-6 rounded-2xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl">
+                    <i class="fa-solid fa-cloud-arrow-down text-sm"></i>
+                    <span>ទាញយករូបភាពបណ្ណសរសើរ (Download Certificate .png)</span>
+                </button>
+                <button onclick="location.reload()" class="px-6 py-3.5 rounded-2xl border border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-slate-300 text-xs font-bold transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>ធ្វើតេស្តឡើងវិញ</span>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-amber-500/10 py-3 text-center text-[11px] text-slate-500 bg-black/30">
+        វិទ្យាល័យ ជា ស៊ីម ឈូកវ៉ា • រៀបរៀងដោយលោកគ្រូ ចាន់ សុខហេង (ឯកទេសគណិតវិទ្យា)
+    </footer>
+
+    <script>
+        // Connect to Firebase of Teacher Chan Sokheng
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBTmY6YKLmpQ4mqAZm96P39IYtR4uQvtE",
+            authDomain: "my-planner-app-e9576.firebaseapp.com",
+            projectId: "my-planner-app-e9576",
+            storageBucket: "my-planner-app-e9576.firebasestorage.app",
+            messagingSenderId: "820137960838",
+            appId: "1:820137960838:web:df39f02662e2aff521b807",
+            measurementId: "G-9LCSDVH7C5"
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+
+        // Helper to format HTML fractions cleanly without LaTeX
+        function F(num, den) {
+            return `<span class="fraction"><span class="num">${num}</span><span class="den">${den}</span></span>`;
+        }
+
+        // 15 Sequential Test Exercises for Lesson 3 Section 2.5: Simple Interest (ការប្រាក់សាមញ្ញ)
+        // Extracted directly from G8.L3.tex Subsection 2.5 (Levels 1, 2, 3)
+        // 8 Easy (Level 1) + 5 Medium (Level 2) + 2 Hard (Level 3)
+        const allQuestions = [
+            // --- កម្រិតទី ១៖ ស្រាល (គណនាការប្រាក់សាមញ្ញរយៈពេល 1 ឆ្នាំ និងច្រើនឆ្នាំ - 8 លំហាត់) ---
+            {
+                level: 1,
+                levelName: "កម្រិតទី ១៖ ស្រាល",
+                title: `យកប្រាក់ដើម P = 500 $ ទៅផ្ញើធនាគាររយៈពេល t = 1 ឆ្នាំ ក្នុងអត្រាការប្រាក់ r = 6% ក្នុងមួយឆ្នាំ។ ចូរគណនាការប្រាក់ (I)`,
+                options: [
+                    `30 $`,
+                    `50 $`,
+                    `300 $`
+                ],
+                correct: 0,
+                hint: "គន្លឹះ៖ I = (P × r × t) ÷ 100 = (500 × 6 × 1) ÷ 100 = 30 $។"
+            },
+            {
+                level: 1,
+                levelName: "កម្រិតទី ១៖ ស្រាល",
+                title: `យកប្រាក់ដើម P = 800 $ ទៅផ្ញើធនាគាររយៈពេល t = 1 ឆ្នាំ ក្នុងអត្រាការប្រាក់ r = 5% ក្នុងមួយឆ្នាំ។ ចូរគណនាការប្រាក់ (I)`,
+                options: [
+                    `25 $`,
+                    `40 $`,
+                    `80 $`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ I = (800 × 5 × 1) ÷ 100 = 40 $។"
+            },
+            {
+                level: 1,
+                levelName: "កម្រិតទី ១៖ ស្រាល",
+                title: `គណនាការប្រាក់សាមញ្ញ (I) បើប្រាក់ដើម P = 1000 $, អត្រា r = 5%, រយៈពេល t = 3 ឆ្នាំ`,
+                options: [
+                    `150 $`,
+                    `300 $`,
+                    `100 $`
+                ],
+                correct: 0,
+                hint: "គន្លឹះ៖ I = (1000 × 5 × 3) ÷ 100 = 10 × 15 = 150 $។"
+            },
+            {
+                level: 1,
+                levelName: "កម្រិតទី ១៖ ស្រាល",
+                title: `គណនាការប្រាក់សាមញ្ញ (I) បើប្រាក់ដើម P = 1500 $, អត្រា r = 6%, រយៈពេល t = 2 ឆ្នាំ`,
+                options: [
+                    `150 $`,
+                    `180 $`,
+                    `360 $`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ I = (1500 × 6 × 2) ÷ 100 = 15 × 12 = 180 $។"
+            },
+            {
+                level: 1,
+                levelName: "កម្រិតទី ១៖ ស្រាល",
+                title: `លោកតារ័ត្នបានយកប្រាក់សន្សំ 3000 $ ទៅផ្ញើធនាគារក្នុងអត្រាការប្រាក់សាមញ្ញ 6% ក្នុងមួយឆ្នាំ រយៈពេល 2 ឆ្នាំ។ តើគាត់ទទួលបានការប្រាក់ប៉ុន្មាន?`,
+                options: [
+                    `180 $`,
+                    `360 $`,
+                    `720 $`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ I = (3000 × 6 × 2) ÷ 100 = 30 × 12 = 360 $។"
+            },
+            {
+                level: 1,
+                levelName: "កម្រិតទី ១៖ ស្រាល",
+                title: `អ្នកគ្រូម្នាក់បានខ្ចីប្រាក់ពីធនាគារចំនួន 4000 $ ក្នុងអត្រាការប្រាក់សាមញ្ញ 7% ក្នុងមួយឆ្នាំ។ ក្រោយរយៈពេល 3 ឆ្នាំ តើគាត់ត្រូវសងការប្រាក់ប៉ុន្មានដុល្លារ?`,
+                options: [
+                    `280 $`,
+                    `840 $`,
+                    `420 $`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ I = (4000 × 7 × 3) ÷ 100 = 40 × 21 = 840 $។"
+            },
+            {
+                level: 1,
+                levelName: "កម្រិតទី ១៖ ស្រាល",
+                title: `សិស្សម្នាក់សន្សំប្រាក់បាន 400 $ ហើយយកទៅផ្ញើក្នុងគណនីសន្សំរយៈពេល 2 ឆ្នាំ ដោយទទួលបានអត្រាការប្រាក់ 4.5% ក្នុងមួយឆ្នាំ។ តើនៅចុងឆ្នាំទីពីរ គាត់មានប្រាក់សរុបក្នុងកុងធនាគារប៉ុន្មានដុល្លារ?`,
+                options: [
+                    `436 $`,
+                    `418 $`,
+                    `472 $`
+                ],
+                correct: 0,
+                hint: "គន្លឹះ៖ I = (400 × 4.5 × 2) ÷ 100 = 36 $។ ប្រាក់សរុប A = 400 + 36 = 436 $។"
+            },
+            {
+                level: 1,
+                levelName: "កម្រិតទី ១៖ ស្រាល",
+                title: `គេយកប្រាក់ដើម P = 600 $ ទៅផ្ញើធនាគាររយៈពេល t = 4 ឆ្នាំ ក្នុងអត្រាការប្រាក់ r = 8% ក្នុងមួយឆ្នាំ។ ចូរគណនាការប្រាក់ (I)`,
+                options: [
+                    `192 $`,
+                    `96 $`,
+                    `48 $`
+                ],
+                correct: 0,
+                hint: "គន្លឹះ៖ I = (600 × 8 × 4) ÷ 100 = 6 × 32 = 192 $។"
+            },
+
+            // --- កម្រិតទី ២៖ មធ្យម (រយៈពេលគិតជាខែ រកប្រាក់ដើម P និងអត្រាការប្រាក់ r - 5 លំហាត់) ---
+            {
+                level: 2,
+                levelName: "កម្រិតទី ២៖ មធ្យម",
+                title: `គណនាការប្រាក់សាមញ្ញ (I) បើប្រាក់ដើម P = 1200 $, អត្រា r = 6%, រយៈពេល t = 6 ខែ`,
+                options: [
+                    `72 $`,
+                    `36 $`,
+                    `18 $`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ បំប្លែង 6 ខែ = 6/12 = 0.5 ឆ្នាំ។ I = (1200 × 6 × 0.5) ÷ 100 = 36 $។"
+            },
+            {
+                level: 2,
+                levelName: "កម្រិតទី ២៖ មធ្យម",
+                title: `គណនាការប្រាក់សាមញ្ញ (I) បើប្រាក់ដើម P = 2400 $, អត្រា r = 5%, រយៈពេល t = 9 ខែ`,
+                options: [
+                    `120 $`,
+                    `90 $`,
+                    `60 $`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ បំប្លែង 9 ខែ = 9/12 = 0.75 ឆ្នាំ។ I = (2400 × 5 × 0.75) ÷ 100 = 90 $។"
+            },
+            {
+                level: 2,
+                levelName: "កម្រិតទី ២៖ មធ្យម",
+                title: `គេទទួលបានការប្រាក់ I = 90 $ ក្រោយផ្ញើរយៈពេល 3 ឆ្នាំ ក្នុងអត្រា 5% ក្នុងមួយឆ្នាំ។ ចូរគណនាតម្លៃប្រាក់ដើម (P)`,
+                options: [
+                    `500 $`,
+                    `600 $`,
+                    `900 $`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ P = (100 × I) ÷ (r × t) = (100 × 90) ÷ (5 × 3) = 9000 ÷ 15 = 600 $។"
+            },
+            {
+                level: 2,
+                levelName: "កម្រិតទី ២៖ មធ្យម",
+                title: `គេយកប្រាក់ដើម 1500 $ ទៅផ្ញើធនាគាររយៈពេល 2 ឆ្នាំ ទទួលបានការប្រាក់ 180 $។ ចូរគណនាអត្រាការប្រាក់ប្រចាំឆ្នាំ (r%)`,
+                options: [
+                    `5%`,
+                    `8%`,
+                    `6%`
+                ],
+                correct: 2,
+                hint: "គន្លឹះ៖ r = (100 × I) ÷ (P × t) = (100 × 180) ÷ (1500 × 2) = 18 000 ÷ 3000 = 6%។"
+            },
+            {
+                level: 2,
+                levelName: "កម្រិតទី ២៖ មធ្យម",
+                title: `បុរសម្នាក់យកប្រាក់ 2000 $ ទៅផ្ញើក្នុងអត្រាការប្រាក់ 6% ក្នុងមួយឆ្នាំ។ តើត្រូវចំណាយពេលប៉ុន្មានឆ្នាំ ដើម្បីឱ្យគាត់ទទួលបានការប្រាក់សរុប 360 $?`,
+                options: [
+                    `3 ឆ្នាំ`,
+                    `4 ឆ្នាំ`,
+                    `2 ឆ្នាំ`
+                ],
+                correct: 0,
+                hint: "គន្លឹះ៖ t = (100 × I) ÷ (P × r) = (100 × 360) ÷ (2000 × 6) = 36 000 ÷ 12 000 = 3 ឆ្នាំ។"
+            },
+
+            // --- កម្រិតទី ៣៖ ធ្ងន់ / កម្រិតខ្ពស់ (ការដកប្រាក់សរុប និងចំណោទពហុជំហាន - ២ លំហាត់) ---
+            {
+                level: 3,
+                levelName: "កម្រិតទី ៣៖ ធ្ងន់ (កម្រិតខ្ពស់)",
+                title: `លោកសុខបានយកប្រាក់ 5000 $ ទៅផ្ញើធនាគារក្នុងអត្រា 5.5% ក្នុងមួយឆ្នាំ។ ក្រោយពេលដកប្រាក់ គាត់ទទួលបានប្រាក់សរុបទាំងដើមទាំងការចំនួន 5825 $។ តើគាត់បានផ្ញើប្រាក់នោះក្នុងរយៈពេលប៉ុន្មានឆ្នាំ?`,
+                options: [
+                    `2 ឆ្នាំ`,
+                    `3 ឆ្នាំ`,
+                    `4 ឆ្នាំ`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ I = 5825 - 5000 = 825 $។ t = (100 × 825) ÷ (5000 × 5.5) = 82 500 ÷ 27 500 = 3 ឆ្នាំ។"
+            },
+            {
+                level: 3,
+                levelName: "កម្រិតទី ៣៖ ធ្ងន់ (កម្រិតខ្ពស់)",
+                title: `អាជីវករម្នាក់ខ្ចីប្រាក់ 1600 $ ពីស្ថាប័នហិរញ្ញវត្ថុមួយ។ ក្រោយរយៈពេល 9 ខែ គាត់ត្រូវសងការប្រាក់ចំនួន 96 $។ ចូរគណនាអត្រាការប្រាក់ប្រចាំឆ្នាំ (r%)`,
+                options: [
+                    `6%`,
+                    `8%`,
+                    `10%`
+                ],
+                correct: 1,
+                hint: "គន្លឹះ៖ រយៈពេលជាឆ្នាំ t = 9/12 = 0.75 ឆ្នាំ។ r = (100 × 96) ÷ (1600 × 0.75) = 9600 ÷ 1200 = 8%។"
+            }
+        ];
+
+        // State Machine
+        let studentProfile = { name: '', gender: 'ប្រុស', grade: '8C2' };
+        let currentQuestionIndex = 0;
+        let selectedAnswers = [];
+        let remainingHints = 3;
+        let violationCount = 0;
+        let isQuizActive = false;
+
+        // Navigation
+        function goToScreen(screenNum) {
+            document.getElementById('screen1_welcome').classList.add('hidden');
+            document.getElementById('screen2_registration').classList.add('hidden');
+            document.getElementById('screen_quiz_workspace').classList.add('hidden');
+            document.getElementById('screen6_certificate').classList.add('hidden');
+
+            if (screenNum === 1) document.getElementById('screen1_welcome').classList.remove('hidden');
+            else if (screenNum === 2) document.getElementById('screen2_registration').classList.remove('hidden');
+            else if (screenNum === 'quiz') document.getElementById('screen_quiz_workspace').classList.remove('hidden');
+            else if (screenNum === 6) document.getElementById('screen6_certificate').classList.remove('hidden');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function handleRegistrationSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('stuName').value.trim();
+            const gender = document.getElementById('stuGender').value;
+            const grade = document.getElementById('stuGrade').value;
+
+            if (!name) return;
+
+            studentProfile = { name, gender, grade };
+            document.getElementById('quizStudentTag').innerText = `${name} (8${grade})`;
+
+            // Initialize Quiz
+            currentQuestionIndex = 0;
+            selectedAnswers = new Array(allQuestions.length).fill(null);
+            remainingHints = 3;
+            violationCount = 0;
+            updateHintUI();
+
+            requestExamFullscreen();
+
+            isQuizActive = true;
+            goToScreen('quiz');
+            loadCurrentQuestion();
+        }
+
+        function loadCurrentQuestion() {
+            const q = allQuestions[currentQuestionIndex];
+            const total = allQuestions.length;
+
+            document.getElementById('quizProgressText').innerText = `សំណួរទី ${currentQuestionIndex + 1} នៃ ${total}`;
+            document.getElementById('quizProgressBar').style.width = `${((currentQuestionIndex + 1) / total) * 100}%`;
+
+            const badge = document.getElementById('quizBadgeLevel');
+            if (q.level === 1) {
+                badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+            } else if (q.level === 2) {
+                badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/30";
+            } else {
+                badge.className = "px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/30";
+            }
+            badge.innerText = q.levelName;
+
+            document.getElementById('qLevelCategoryLabel').innerText = `★ ${q.levelName}`;
+            document.getElementById('qTitleHtml').innerHTML = q.title;
+
+            const list = document.getElementById('qChoicesList');
+            list.innerHTML = '';
+
+            const selected = selectedAnswers[currentQuestionIndex];
+
+            q.options.forEach((opt, optIdx) => {
+                const label = document.createElement('label');
+                label.className = "flex items-center gap-3.5 p-3.5 rounded-2xl border border-slate-700 bg-black/40 hover:border-amber-400/60 hover:bg-amber-950/20 cursor-pointer transition";
+
+                const isChecked = selected === optIdx ? 'checked' : '';
+
+                label.innerHTML = `
+                    <input type="radio" name="optChoice" value="${optIdx}" ${isChecked} class="w-4 h-4 text-amber-500 focus:ring-amber-400">
+                    <span class="text-xs sm:text-sm font-semibold text-slate-100">${opt}</span>
+                `;
+                list.appendChild(label);
+            });
+
+            document.getElementById('quizSelectionWarning').classList.add('hidden');
+
+            const btnNext = document.getElementById('btnSubmitNext');
+            if (currentQuestionIndex === total - 1) {
+                btnNext.innerHTML = '<span>ឆ្លើយ & ទទួលបណ្ណសរសើរ</span> <i class="fa-solid fa-award"></i>';
+            } else {
+                btnNext.innerHTML = '<span>ឆ្លើយ & លោតសំណួរបន្ទាប់</span> <i class="fa-solid fa-arrow-right"></i>';
+            }
+        }
+
+        function handleQuestionSubmitAndNext() {
+            const checked = document.querySelector('input[name="optChoice"]:checked');
+            if (!checked) {
+                document.getElementById('quizSelectionWarning').classList.remove('hidden');
+                return;
+            }
+
+            selectedAnswers[currentQuestionIndex] = parseInt(checked.value);
+
+            if (currentQuestionIndex < allQuestions.length - 1) {
+                currentQuestionIndex++;
+                loadCurrentQuestion();
+            } else {
+                finishQuizAndEvaluate();
+            }
+        }
+
+        // ================= HINT FEATURE (MAX 3 TIMES) =================
+        function updateHintUI() {
+            document.getElementById('hintBadgeCount').innerText = remainingHints;
+            const btn = document.getElementById('btnHint');
+            if (remainingHints <= 0) {
+                btn.classList.add('opacity-40', 'cursor-not-allowed');
+                btn.disabled = true;
+            } else {
+                btn.classList.remove('opacity-40', 'cursor-not-allowed');
+                btn.disabled = false;
+            }
+        }
+
+        function useHint() {
+            if (remainingHints <= 0) {
+                alert("ប្អូនបានប្រើប្រាស់ Hint អស់ចំនួន ៣ ដងហើយ!");
+                return;
+            }
+
+            const q = allQuestions[currentQuestionIndex];
+            document.getElementById('hintText').innerText = q.hint || "ប្រើរូបមន្ត I = (P × r × t) ÷ 100 ដោយរុករកតួអញ្ញាត។";
+            remainingHints--;
+            updateHintUI();
+
+            document.getElementById('hintRemainingBadge').innerText = `${remainingHints}/3 ដង`;
+            document.getElementById('hintModal').classList.remove('hidden');
+            document.getElementById('hintModal').classList.add('flex');
+        }
+
+        function closeHintModal() {
+            document.getElementById('hintModal').classList.add('hidden');
+            document.getElementById('hintModal').classList.remove('flex');
+        }
+
+        // ================= ANTI-CHEAT & SECURITY SYSTEM =================
+        document.addEventListener('contextmenu', e => {
+            if (isQuizActive) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        document.addEventListener('copy', e => {
+            if (isQuizActive) {
+                e.preventDefault();
+                triggerSecurityViolation("ហាមចម្លង (Copy) អត្ថបទលំហាត់ជាដាច់ខាត!");
+                return false;
+            }
+        });
+
+        document.addEventListener('keyup', e => {
+            if (isQuizActive && (e.key === 'PrintScreen' || e.keyCode === 44)) {
+                navigator.clipboard.writeText('');
+                triggerSecurityViolation("ប្រព័ន្ធហាមឃាត់ការថតអេក្រង់ (Screenshot) អំឡុងពេលធ្វើតេស្ត!");
+            }
+        });
+        document.addEventListener('keydown', e => {
+            if (isQuizActive) {
+                if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 'p' || e.key === 's')) {
+                    e.preventDefault();
+                    triggerSecurityViolation("ហាមប្រើ Shortcut សម្រាប់ចម្លង ឬថតលំហាត់!");
+                }
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                }
+            }
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (isQuizActive && document.hidden) {
+                triggerSecurityViolation("ហាមចាកចេញ ឬឆ្លាស់ទៅកាន់កម្មវិធីផ្សេងអំឡុងពេលធ្វើតេស្ត!");
+            }
+        });
+        window.addEventListener('blur', () => {
+            if (isQuizActive) {
+                triggerSecurityViolation("ផ្ទាំងតេស្តបានបាត់បង់ការផ្ដោត (App switched or split-screen attempt)!");
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (isQuizActive) {
+                if (window.innerWidth < 340 || window.innerHeight < 450) {
+                    triggerSecurityViolation("ហាមបំបែកអេក្រង់ (Split-Screen) អំឡុងពេលធ្វើតេស្ត!");
+                }
+            }
+        });
+
+        function triggerSecurityViolation(reason) {
+            if (!isQuizActive) return;
+            violationCount++;
+            document.getElementById('securityViolationReason').innerText = reason;
+            document.getElementById('violationCountBadge').innerText = `${violationCount} / 3`;
+
+            const modal = document.getElementById('securityViolationModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            if (violationCount >= 3) {
+                alert("⚠️ អ្នកបានល្មើសបម្រាមសុវត្ថិភាពលើស ៣ ដង! ប្រព័ន្ធនឹងបញ្ចប់តេស្តស្វ័យប្រវត្តិ។");
+                modal.classList.add('hidden');
+                finishQuizAndEvaluate();
+            }
+        }
+
+        function resumeQuizAfterViolation() {
+            document.getElementById('securityViolationModal').classList.add('hidden');
+            document.getElementById('securityViolationModal').classList.remove('flex');
+            requestExamFullscreen();
+        }
+
+        function requestExamFullscreen() {
+            const docEl = document.documentElement;
+            if (docEl.requestFullscreen) docEl.requestFullscreen().catch(() => {});
+            else if (docEl.webkitRequestFullscreen) docEl.webkitRequestFullscreen().catch(() => {});
+        }
+
+        // ================= FINISH QUIZ & LUXURY CERTIFICATE =================
+        async function finishQuizAndEvaluate() {
+            isQuizActive = false;
+
+            let score = 0;
+            allQuestions.forEach((q, idx) => {
+                if (selectedAnswers[idx] === q.correct) score++;
+            });
+
+            const total = allQuestions.length;
+            const percentage = ((score / total) * 100).toFixed(1);
+
+            let evalText = 'មធ្យម (D)';
+            if (percentage >= 90) evalText = 'ល្អប្រសើរ (A)';
+            else if (percentage >= 80) evalText = 'ល្អណាស់ (B)';
+            else if (percentage >= 65) evalText = 'ល្អ (C)';
+            else if (percentage >= 50) evalText = 'មធ្យម (D)';
+            else evalText = 'ត្រូវខិតខំបន្ថែម (E/F)';
+
+            // Populate Certificate
+            document.getElementById('certStudentFullName').innerText = studentProfile.name;
+            document.getElementById('certStudentGender').innerText = studentProfile.gender;
+            document.getElementById('certStudentGrade').innerText = `8${studentProfile.grade}`;
+            document.getElementById('certFinalScore').innerText = `${score} / ${total}`;
+            document.getElementById('certPercentage').innerText = `${percentage}%`;
+            document.getElementById('certEvaluation').innerText = evalText;
+
+            const now = new Date();
+            document.getElementById('certIssuedDate').innerText = `កាលបរិច្ឆេទ៖ ${now.toLocaleDateString('km-KH')} ម៉ោង ${now.toLocaleTimeString('km-KH', { hour: '2-digit', minute: '2-digit' })}`;
+            document.getElementById('certUniqueCode').innerText = `MC8-L325-${studentProfile.grade}-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            goToScreen(6);
+
+            // Auto-send result to Firebase Firestore Central Hub
+            try {
+                await db.collection('exam_hub_submissions').add({
+                    studentName: studentProfile.name,
+                    gender: studentProfile.gender,
+                    gradeLevel: `8${studentProfile.grade}`,
+                    quizTitle: "មេរៀនទី៣ (២.៥)៖ ការប្រាក់សាមញ្ញ",
+                    score: score,
+                    maxScore: total,
+                    percentage: parseFloat(percentage),
+                    gradeLetter: evalText,
+                    hintsUsed: (3 - remainingHints),
+                    violations: violationCount,
+                    submittedAt: now.toISOString()
+                });
+                console.log("Synced to Central Hub successfully!");
+            } catch (err) {
+                console.error("Firestore sync error:", err);
+            }
+        }
+
+        function downloadCertificateImage() {
+            const certElement = document.getElementById('certificateCaptureContainer');
+            const btn = document.getElementById('btnDownloadCert');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> កំពុងរៀបចំបណ្ណសរសើរ...';
+
+            html2canvas(certElement, {
+                scale: 3,
+                useCORS: true,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `បណ្ណសរសើរ_ការប្រាក់សាមញ្ញ_${studentProfile.name}_8${studentProfile.grade}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down text-sm"></i><span>ទាញយករូបភាពបណ្ណសរសើរ (Download Certificate .png)</span>';
+            }).catch(err => {
+                console.error("Download certificate error:", err);
+                alert("មានបញ្ហាក្នុងការទាញយករូបភាពបណ្ណសរសើរ!");
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-down text-sm"></i><span>ទាញយករូបភាពបណ្ណសរសើរ (Download Certificate .png)</span>';
+            });
+        }
+    </script>
+</body>
+</html>
